@@ -1,5 +1,10 @@
 package net.flood.ocrnn;
 
+import net.flood.ocrnn.util.NativeUtils;
+import net.flood.ocrnn.util.Platform;
+
+import java.io.IOException;
+
 /**
  * A basic artificial neural network inspired by animal brains.
  * It is made by three layers (input, hidden, output layers). It is
@@ -8,7 +13,34 @@ package net.flood.ocrnn;
  */
 public class NeuralNetwork {
     static {
-        System.load(System.getProperty("java.library.path") + "/liblib_ocrnn.so");
+        Platform platform = Platform.getPlatform();
+
+        try {
+            switch (platform.getOs()) {
+                case WINDOWS:
+                    if (platform.getArch().equals("64")) {
+                        NativeUtils.loadLibraryFromJar("/natives/win64/libgcc_s_seh-1.dll");
+                        NativeUtils.loadLibraryFromJar("/natives/win64/libstdc++-6.dll");
+                        NativeUtils.loadLibraryFromJar("/natives/win64/lib_ocrnn.dll");
+                    } else {
+                        //TODO load x86 libraries
+                    }
+                    break;
+                case LINUX:
+                    if(platform.getArch().equals("64")) {
+                        NativeUtils.loadLibraryFromJar("/natives/linux64/lib_ocrnn.so");
+                        break;
+                    } else {
+                        //TODO load x86 libraries
+                    }
+                case MAC_OSX:
+                    //TODO load libraries
+                    break;
+            }
+        } catch (IOException e) {
+            System.err.println("Couldn't not load native libraries!");
+            e.printStackTrace();
+        }
     }
 
     private long nativeHandle; //Hold pointer to c++ neural_net object
