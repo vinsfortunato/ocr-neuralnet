@@ -11,6 +11,8 @@ If you need to run this on other SO you have to compile the C++ source to get an
 
 Training/Test data used in the above video can be found here: http://yann.lecun.com/exdb/mnist/
 
+Pre-compiled versions can be found in ```Releases```.
+
 ## How to build the application
 
 You can build the application by using gradle. Java JDK min 1.8 is necessary to build this project.
