@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+def app_name = 'OCR-NN'
+group 'net.flood'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'net.flood.ocrnn.Main',
+                "App-Version" : version
+        )
+    }
+    baseName = "${app_name}"
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

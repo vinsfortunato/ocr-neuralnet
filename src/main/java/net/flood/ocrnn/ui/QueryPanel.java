@@ -28,16 +28,16 @@ public class QueryPanel extends JPanel implements CharacterCanvas.DrawListener {
         charCanvas.setPreferredSize(new Dimension(CHAR_WINDOW_SIZE, CHAR_WINDOW_SIZE));
         charDrawer = new CharacterDrawer();
         charDrawer.setPreferredSize(new Dimension(CHAR_WINDOW_SIZE, CHAR_WINDOW_SIZE));
-        clearCanvasButton = new JButton("Cancella");
+        clearCanvasButton = new JButton("Clear");
         clearCanvasButton.setPreferredSize(new Dimension(CHAR_WINDOW_SIZE, 30));
-        confidenceLabel = new JLabel("Confidenza: ?");
+        confidenceLabel = new JLabel("Confidence: ?");
         inputTitleLabel = new JLabel("INPUT");
         inputTitleLabel.setFont(inputTitleLabel.getFont().deriveFont(Const.TITLE_FONT_SIZE));
         outputTitleLabel = new JLabel("OUTPUT");
         outputTitleLabel.setFont(outputTitleLabel.getFont().deriveFont(Const.TITLE_FONT_SIZE));
-        resutlsTitleLabel = new JLabel("CONFIDENZE");
+        resutlsTitleLabel = new JLabel("CONFIDENCES");
         resutlsTitleLabel.setFont(resutlsTitleLabel.getFont().deriveFont(Const.TITLE_FONT_SIZE));
-        trainButton = new JButton("Allena");
+        trainButton = new JButton("Train");
         percentageDrawerContainer = new JPanel();
         percentageDrawerContainer.setLayout(new BoxLayout(percentageDrawerContainer, BoxLayout.Y_AXIS));
         for(int c = 0; c < 10; c++) {
@@ -118,7 +118,7 @@ public class QueryPanel extends JPanel implements CharacterCanvas.DrawListener {
                         drawer.setDestinationValue((float)result.confidences[i]);
                     }
                     charDrawer.draw(result.getCharacter());
-                    confidenceLabel.setText("Confidenza: " + String.format("%.2f%%",
+                    confidenceLabel.setText("Confidence: " + String.format("%.2f%%",
                             100D * result.confidences[Integer.valueOf(String.valueOf(result.getCharacter()))]));
             });
             } catch (Exception e) {

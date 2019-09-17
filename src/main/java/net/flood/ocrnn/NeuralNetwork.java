@@ -24,6 +24,7 @@ public class NeuralNetwork {
                         NativeUtils.loadLibraryFromJar("/natives/win64/lib_ocrnn.dll");
                     } else {
                         //TODO load x86 libraries
+                        throw new IllegalStateException("Unsupported OS!");
                     }
                     break;
                 case LINUX:
@@ -31,11 +32,12 @@ public class NeuralNetwork {
                         NativeUtils.loadLibraryFromJar("/natives/linux64/lib_ocrnn.so");
                         break;
                     } else {
+                        throw new IllegalStateException("Unsupported OS!");
                         //TODO load x86 libraries
                     }
                 case MAC_OSX:
                     //TODO load libraries
-                    break;
+                    throw new IllegalStateException("Unsupported OS!");
             }
         } catch (IOException e) {
             System.err.println("Couldn't not load native libraries!");

@@ -30,29 +30,29 @@ public class TrainingPanel extends JPanel implements CharacterTrainer.TrainListe
     }
 
     private void initComponents() {
-        loadTrainingLabel = new JLabel("Carica i file per l'allenamento.");
-        loadTestLabel = new JLabel("Carica i file per i test.");
-        loadTrainingImageButton = new JButton("Carica immagini");
-        loadTrainingLabelButton = new JButton("Carica etichette");
-        loadTestImageButton = new JButton("Carica immagini");
-        loadTestLabelButton = new JButton("Carica etichette");
+        loadTrainingLabel = new JLabel("Load training files");
+        loadTestLabel = new JLabel("Load test files");
+        loadTrainingImageButton = new JButton("Load images");
+        loadTrainingLabelButton = new JButton("Load labels");
+        loadTestImageButton = new JButton("Load images");
+        loadTestLabelButton = new JButton("Load labels");
         loadTrainingFileLabel = new JLabel("");
         loadTestFileLabel = new JLabel("");
-        exportModelButton = new JButton("Esporta modello");
-        importModelButton = new JButton("Importa modello");
-        trainingTitle = new JLabel("Stato allenamento");
+        exportModelButton = new JButton("Export model");
+        importModelButton = new JButton("Import model");
+        trainingTitle = new JLabel("Training state");
         trainingTitle.setFont(trainingTitle.getFont().deriveFont(Const.TITLE_FONT_SIZE));
         trainingProgressBar = new JProgressBar();
-        epochLabel = new JLabel("Epoca : 0");
+        epochLabel = new JLabel("Epoch : 0");
         performanceLabel = new JLabel("Performance : 0%");
-        controlButton = new JButton("Avvia");
+        controlButton = new JButton("Start");
         matrixDrawer = new MatrixDrawer();
         matrixDrawer.setPreferredSize(new Dimension(150, 150));
         characterDrawer = new CharacterDrawer();
         characterDrawer.setPreferredSize(new Dimension(150, 150));
         testTitle = new JLabel("Test");
         testTitle.setFont(testTitle.getFont().deriveFont(Const.TITLE_FONT_SIZE));
-        backButton = new JButton("Torna indietro");
+        backButton = new JButton("Go back");
         controlButton.setEnabled(false);
         importModelButton.setVisible(false);
         exportModelButton.setVisible(false);
@@ -79,18 +79,18 @@ public class TrainingPanel extends JPanel implements CharacterTrainer.TrainListe
                     trainer = new CharacterTrainer(trainProvider);
                     trainer.setListener(this);
                     trainer.start();
-                    controlButton.setText("Pausa");
+                    controlButton.setText("Pause");
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
             } else if(trainer.isPaused()) {
                 trainer.resume();
                 tester.start();
-                controlButton.setText("Pausa");
+                controlButton.setText("Pause");
             } else {
                 trainer.pause();
                 tester.stop();
-                controlButton.setText("Continua");
+                controlButton.setText("Continue");
             }
         });
         loadTrainingImageButton.addActionListener(e -> {
@@ -235,7 +235,7 @@ public class TrainingPanel extends JPanel implements CharacterTrainer.TrainListe
     @Override
     public void onTrainEpochEnd() {
         SwingUtilities.invokeLater(() -> {
-            epochLabel.setText("Epoca: " + trainer.getEpoch());
+            epochLabel.setText("Epoch: " + trainer.getEpoch());
         });
     }
 
